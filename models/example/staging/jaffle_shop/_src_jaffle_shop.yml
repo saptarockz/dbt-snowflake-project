@@ -1,0 +1,27 @@
+sources:
+  - name: jaffle_shop
+    database: RAW
+    schema: JAFFLE_SHOP
+    config:
+          freshness:
+            warn_after:
+              count: 120
+              period: day
+            error_after:
+              count: 130
+              period: day
+          loaded_at_field: _etl_loaded_at
+    tables:
+      - name: customers
+        freshness: null # this is done so that data pipeline refresh check skips customers table as 
+        # column = _etl_loaded_at as mentioned above is only in orders table
+      - name: orders
+        ##config:
+          #freshness:
+            #warn_after:
+             #count: 120
+              ##period: day
+            #error_after:
+              #count: 130
+              #period: day
+          #loaded_at_field: _etl_loaded_at
